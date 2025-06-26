@@ -1,0 +1,69 @@
+{
+  "Files": [
+    {
+      "Id": "D:\\SistemaScout\\BackendScout\\wwwroot\\dashboard-dirigente.html",
+      "PackagePath": "staticwebassets\\dashboard-dirigente.html"
+    },
+    {
+      "Id": "D:\\SistemaScout\\BackendScout\\wwwroot\\dashboard-scout.html",
+      "PackagePath": "staticwebassets\\dashboard-scout.html"
+    },
+    {
+      "Id": "D:\\SistemaScout\\BackendScout\\wwwroot\\index.html",
+      "PackagePath": "staticwebassets\\index.html"
+    },
+    {
+      "Id": "D:\\SistemaScout\\BackendScout\\wwwroot\\login.html",
+      "PackagePath": "staticwebassets\\login.html"
+    },
+    {
+      "Id": "D:\\SistemaScout\\BackendScout\\wwwroot\\login.js",
+      "PackagePath": "staticwebassets\\login.js"
+    },
+    {
+      "Id": "D:\\SistemaScout\\BackendScout\\wwwroot\\objetivos-nivel.html",
+      "PackagePath": "staticwebassets\\objetivos-nivel.html"
+    },
+    {
+      "Id": "D:\\SistemaScout\\BackendScout\\wwwroot\\objetivos-scout.html",
+      "PackagePath": "staticwebassets\\objetivos-scout.html"
+    },
+    {
+      "Id": "D:\\SistemaScout\\BackendScout\\wwwroot\\objetivos-seleccionados.html",
+      "PackagePath": "staticwebassets\\objetivos-seleccionados.html"
+    },
+    {
+      "Id": "D:\\SistemaScout\\BackendScout\\wwwroot\\panel-unidad.html",
+      "PackagePath": "staticwebassets\\panel-unidad.html"
+    },
+    {
+      "Id": "D:\\SistemaScout\\BackendScout\\wwwroot\\register.html",
+      "PackagePath": "staticwebassets\\register.html"
+    },
+    {
+      "Id": "D:\\SistemaScout\\BackendScout\\wwwroot\\unidades.html",
+      "PackagePath": "staticwebassets\\unidades.html"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.BackendScout.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssetEndpoints.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.BackendScout.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.BackendScout.props",
+      "PackagePath": "build\\BackendScout.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.BackendScout.props",
+      "PackagePath": "buildMultiTargeting\\BackendScout.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.BackendScout.props",
+      "PackagePath": "buildTransitive\\BackendScout.props"
+    }
+  ],
+  "ElementsToRemove": []
+}
