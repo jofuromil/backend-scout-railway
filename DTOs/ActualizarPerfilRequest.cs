@@ -2,6 +2,8 @@ namespace BackendScout.DTOs
 {
     public class ActualizarPerfilRequest
     {
+        public string? CI { get; set; }
+
         public string NombreCompleto { get; set; }
         public DateTime FechaNacimiento { get; set; }
         public string Telefono { get; set; }
@@ -13,6 +15,5 @@ namespace BackendScout.DTOs
         public string? Genero { get; set; }
         public string? Profesion { get; set; }   // SOLO dirigentes
         public string? Ocupacion { get; set; }   // SOLO dirigentes
-
     }
 }

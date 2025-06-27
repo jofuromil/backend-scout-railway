@@ -319,6 +319,27 @@ namespace BackendScout.Controllers
             var codigo = await _resetService.GenerarCodigoAsync(usuarioId);
             return Ok(new { codigo });
         }
+
+        [HttpGet("perfil/{id}")]
+        [Authorize(Roles = "Dirigente")]
+        public async Task<IActionResult> VerPerfilDeScout(Guid id)
+        {
+            var perfil = await _userService.ObtenerPerfilAsync(id);
+            if (perfil == null)
+                return NotFound(new { mensaje = "Scout no encontrado." });
+
+            return Ok(perfil);
+        }
         
+        [HttpPut("perfil/{id}")]
+        [Authorize(Roles = "Dirigente")]
+        public async Task<IActionResult> EditarPerfilDeScout(Guid id, [FromBody] ActualizarPerfilRequest request)
+        {
+            var actualizado = await _userService.ActualizarPerfilAsync(id, request);
+            if (!actualizado)
+                return BadRequest(new { mensaje = "No se pudo actualizar el perfil del scout." });
+
+            return Ok(new { mensaje = "Perfil actualizado correctamente." });
+        }
     }
 }

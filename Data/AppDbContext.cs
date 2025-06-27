@@ -29,6 +29,8 @@ namespace BackendScout.Data
         public DbSet<MensajeEvento> MensajesEvento { get; set; }
         public DbSet<MensajeEventoDestinatario> MensajesEventoDestinatarios { get; set; }
         public DbSet<PasswordResetCode> PasswordResetCodes { get; set; }
+        public DbSet<Gestion> Gestiones { get; set; }
+        public DbSet<RegistroGestion> RegistrosGestion { get; set; }
 
         // ✅ DbSet corregido
         public DbSet<NivelDistrito> NivelesDistrito { get; set; }

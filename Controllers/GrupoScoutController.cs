@@ -32,17 +32,23 @@ namespace BackendScout.Controllers
             return Ok(dirigentes);
         }
         private Guid ObtenerUsuarioIdDesdeToken()
-{
-    var userIdClaim = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier);
-    return Guid.Parse(userIdClaim.Value);
-}
+        {
+            var userIdClaim = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier);
+            return Guid.Parse(userIdClaim.Value);
+        }
 
+            [HttpGet("ver-scouts/{usuarioId}")]
+            public async Task<IActionResult> VerScoutsDelGrupo(Guid usuarioId)
+            {
+                var scouts = await _userService.ObtenerScoutsDelGrupoAsync(usuarioId);
+                return Ok(scouts);
+            }
 
 
         [HttpPut("asignar-admingrupo/{userId}")]
-[Authorize(Roles = "Dirigente")]
-public async Task<IActionResult> AsignarAdminGrupo(Guid userId)
-{
+        [Authorize(Roles = "Dirigente")]
+        public async Task<IActionResult> AsignarAdminGrupo(Guid userId)
+        {
     var usuarioActualId = ObtenerUsuarioIdDesdeToken(); // método auxiliar
     var usuarioActual = await _context.Users
         .Include(u => u.GrupoScoutUsuarios)

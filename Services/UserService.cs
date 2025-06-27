@@ -175,6 +175,7 @@ namespace BackendScout.Services
             return new UserDto
             {
                 Id = user.Id,
+                CI = user.CI,
                 NombreCompleto = user.NombreCompleto,
                 FechaNacimiento = user.FechaNacimiento,
                 Telefono = user.Telefono,
@@ -197,6 +198,7 @@ namespace BackendScout.Services
             var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == usuarioId);
             if (user == null) return false;
 
+            user.CI = request.CI; // ✅ Nuevo campo agregado
             user.NombreCompleto = request.NombreCompleto;
             user.FechaNacimiento = request.FechaNacimiento;
             user.Telefono = request.Telefono;
@@ -233,7 +235,7 @@ namespace BackendScout.Services
                 .Include(u => u.Unidad)
                 .FirstOrDefaultAsync(u => u.Id == scoutId && u.Tipo == "Scout");
         }
-        public async Task<List<DirigenteGrupoDto>> ObtenerDirigentesDelGrupo(Guid userId)
+        public async Task<List<UserDto>> ObtenerDirigentesDelGrupo(Guid userId)
         {
             var usuario = await _context.Users
                 .Include(u => u.Unidad)
@@ -257,18 +259,76 @@ namespace BackendScout.Services
                     u.Unidad != null &&
                     u.Unidad.GrupoScoutId == grupoScoutId
                 )
-                .Select(u => new DirigenteGrupoDto
+                .Select(u => new UserDto
                 {
                     Id = u.Id,
+                    CI = u.CI,
                     NombreCompleto = u.NombreCompleto,
+                    FechaNacimiento = u.FechaNacimiento,
+                    Telefono = u.Telefono,
+                    Correo = u.Correo,
+                    Ciudad = u.Ciudad,
+                    Tipo = u.Tipo,
                     Rama = u.Rama,
-                    Unidad = u.Unidad.Nombre,
-                    EsAdminGrupoScout = u.EsAdminGrupoScout
+                    Direccion = u.Direccion,
+                    InstitucionEducativa = u.InstitucionEducativa,
+                    NivelEstudios = u.NivelEstudios,
+                    Genero = u.Genero,
+                    Profesion = u.Profesion,
+                    Ocupacion = u.Ocupacion
                 })
                 .ToListAsync();
 
             return dirigentes;
         }
+
+        public async Task<List<UserDto>> ObtenerScoutsDelGrupoAsync(Guid usuarioId)
+        {
+            var dirigente = await _context.Users
+                .Include(u => u.GrupoScoutUsuarios)
+                .FirstOrDefaultAsync(u => u.Id == usuarioId);
+
+            var grupoId = dirigente?.GrupoScoutUsuarios?.FirstOrDefault()?.GrupoScoutId;
+            if (grupoId == null || grupoId == 0)
+            {
+                return new List<UserDto>();
+            }
+
+            var scouts = await _context.Users
+                .Include(u => u.Unidad)
+                .Where(u => u.Tipo == "Scout" && u.Unidad != null && u.Unidad.GrupoScoutId == grupoId)
+                .Select(u => new UserDto
+                {
+                    Id = u.Id,
+                    CI = u.CI,
+                    NombreCompleto = u.NombreCompleto,
+                    FechaNacimiento = u.FechaNacimiento,
+                    Telefono = u.Telefono,
+                    Correo = u.Correo,
+                    Ciudad = u.Ciudad,
+                    Tipo = u.Tipo,
+                    Rama = u.Rama,
+                    Direccion = u.Direccion,
+                    InstitucionEducativa = u.InstitucionEducativa,
+                    NivelEstudios = u.NivelEstudios,
+                    Genero = u.Genero,
+                    Profesion = u.Profesion,
+                    Ocupacion = u.Ocupacion
+                })
+                .ToListAsync();
+
+            return scouts;
+        }
+
+        public async Task<User?> ObtenerUsuarioPorIdAsync(Guid id)
+            {
+                return await _context.Users
+                    .Include(u => u.Unidad)
+                    .Include(u => u.GrupoScoutUsuarios)
+                    .ThenInclude(gu => gu.GrupoScout)
+                    .FirstOrDefaultAsync(u => u.Id == id);
+            }
+
 
     }
 }

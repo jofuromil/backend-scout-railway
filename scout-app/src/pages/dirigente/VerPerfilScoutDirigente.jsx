@@ -1,20 +1,23 @@
 import React, { useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
-import MenuFijo from "@/components/MenuFijo";
+import MenuFijoDirigente from "@/components/MenuFijo";
 
-export default function PerfilUsuario() {
+export default function VerPerfilScoutDirigente() {
+  const { scoutId } = useParams();
   const [perfil, setPerfil] = useState(null);
   const [editando, setEditando] = useState(false);
   const token = localStorage.getItem("token");
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios
-      .get("/api/users/perfil", {
+      .get(`/api/users/perfil/${scoutId}`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((res) => setPerfil(res.data))
-      .catch(() => alert("Error al cargar perfil"));
-  }, []);
+      .catch(() => alert("Error al cargar perfil del scout"));
+  }, [scoutId]);
 
   const handleChange = (e) => {
     setPerfil({ ...perfil, [e.target.name]: e.target.value });
@@ -22,7 +25,7 @@ export default function PerfilUsuario() {
 
   const guardarCambios = () => {
     axios
-      .put("/api/users/perfil", perfil, {
+      .put(`/api/users/perfil/${scoutId}`, perfil, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then(() => {
@@ -36,34 +39,23 @@ export default function PerfilUsuario() {
 
   return (
     <div className="min-h-screen bg-white pb-20 relative">
-      {/* Menú fijo superior */}
       <div className="hidden lg:block fixed top-0 left-0 right-0 z-50">
-        <MenuFijo />
+        <MenuFijoDirigente />
       </div>
 
       <div className="max-w-xl mx-auto p-6 pt-6">
-        <h2 className="text-2xl font-bold mb-4">Mi Perfil</h2>
+        <h2 className="text-2xl font-bold mb-4">Perfil del Scout</h2>
 
         <div className="grid grid-cols-1 gap-4">
           <Campo nombre="Nombre completo" valor={perfil.nombreCompleto} name="nombreCompleto" editable={editando} onChange={handleChange} />
           <Campo nombre="Carnet de Identidad" valor={perfil.ci} name="ci" editable={editando} onChange={handleChange} />
-          <Campo nombre="Fecha de nacimiento" valor={perfil.fechaNacimiento ? perfil.fechaNacimiento.slice(0, 10) : ""} name="fechaNacimiento" tipo="date" editable={editando} onChange={handleChange} />
+          <Campo nombre="Fecha de nacimiento" valor={perfil.fechaNacimiento?.slice(0, 10)} name="fechaNacimiento" tipo="date" editable={editando} onChange={handleChange} />
           <Campo nombre="Teléfono" valor={perfil.telefono} name="telefono" editable={editando} onChange={handleChange} />
           <Campo nombre="Ciudad" valor={perfil.ciudad} name="ciudad" editable={editando} onChange={handleChange} />
           <Campo nombre="Dirección" valor={perfil.direccion} name="direccion" editable={editando} onChange={handleChange} />
           <Campo nombre="Género" valor={perfil.genero} name="genero" editable={editando} onChange={handleChange} />
-
-          {perfil.tipo === "Scout" ? (
-            <>
-              <Campo nombre="Institución educativa" valor={perfil.institucionEducativa} name="institucionEducativa" editable={editando} onChange={handleChange} />
-              <Campo nombre="Nivel de estudios" valor={perfil.nivelEstudios} name="nivelEstudios" editable={editando} onChange={handleChange} />
-            </>
-          ) : (
-            <>
-              <Campo nombre="Profesión" valor={perfil.profesion} name="profesion" editable={editando} onChange={handleChange} />
-              <Campo nombre="Ocupación" valor={perfil.ocupacion} name="ocupacion" editable={editando} onChange={handleChange} />
-            </>
-          )}
+          <Campo nombre="Institución educativa" valor={perfil.institucionEducativa} name="institucionEducativa" editable={editando} onChange={handleChange} />
+          <Campo nombre="Nivel de estudios" valor={perfil.nivelEstudios} name="nivelEstudios" editable={editando} onChange={handleChange} />
 
           <div>
             <label className="font-semibold">Correo electrónico</label>
@@ -93,9 +85,8 @@ export default function PerfilUsuario() {
         </div>
       </div>
 
-      {/* Menú fijo inferior en móviles */}
       <div className="lg:hidden fixed bottom-0 left-0 right-0 z-50">
-        <MenuFijo />
+        <MenuFijoDirigente />
       </div>
     </div>
   );
@@ -109,7 +100,7 @@ function Campo({ nombre, valor, name, editable, onChange, tipo = "text" }) {
         type={tipo}
         className="w-full p-2 border rounded"
         name={name}
-        value={valor !== null && valor !== undefined ? valor : ""}
+        value={valor || ""}
         disabled={!editable}
         onChange={onChange}
       />

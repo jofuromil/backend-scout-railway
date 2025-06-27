@@ -473,3 +473,4 @@ D:\SistemaScout\backendscout23\obj\Debug\net8.0\refint\BackendScout.dll
 D:\SistemaScout\backendscout23\obj\Debug\net8.0\BackendScout.pdb
 D:\SistemaScout\backendscout23\obj\Debug\net8.0\BackendScout.genruntimeconfig.cache
 D:\SistemaScout\backendscout23\obj\Debug\net8.0\ref\BackendScout.dll
+D:\SistemaScout\BackendScout\obj\Debug\net8.0\BackendScout.sourcelink.json

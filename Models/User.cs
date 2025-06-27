@@ -3,6 +3,7 @@ namespace BackendScout.Models
     public class User
     {
         public Guid Id { get; set; } = Guid.NewGuid();
+        public string? CI { get; set; }
         public string NombreCompleto { get; set; }
         public DateTime FechaNacimiento { get; set; }
         public string Telefono { get; set; }

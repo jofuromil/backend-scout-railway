@@ -92,6 +92,8 @@ builder.Services.AddScoped<EventoService>();
 builder.Services.AddScoped<DocumentoEventoService>();
 builder.Services.AddScoped<AuthService>();
 builder.Services.AddScoped<PasswordResetService>();
+builder.Services.AddScoped<RegistroGestionService>();
+builder.Services.AddScoped<GestionService>();
 
 // ✅ Base de datos
 builder.Services.AddDbContext<AppDbContext>(options =>

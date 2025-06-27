@@ -26,40 +26,49 @@ export default function EspecialidadesResumenDirigente() {
         <MenuFijo />
       </div>
 
-      <div className="max-w-3xl mx-auto mt-6 px-4">
+      <div className="max-w-4xl mx-auto mt-6 px-4">
         <h2 className="text-2xl font-bold mb-6">Resumen de Especialidades por Scout</h2>
 
         {scouts.length === 0 ? (
           <p>No hay datos de especialidades para mostrar.</p>
         ) : (
-          <ul className="space-y-4">
-            {scouts.map((scout) => (
-              <li key={scout.scoutId} className="p-4 border rounded-xl bg-white shadow">
-                <h3 className="font-semibold text-lg mb-2">{scout.nombreCompleto}</h3>
-                {scout.especialidades.length === 0 ? (
-                  <p className="text-sm text-gray-600">Sin especialidades aún.</p>
-                ) : (
-                  <ul className="space-y-1">
-                    {scout.especialidades.map((esp) => (
-                      <li key={esp.especialidadId} className="flex justify-between text-sm">
-                        <span>{esp.nombre}</span>
-                        <span
-                          className={
-                            esp.cumplida
-                              ? "text-green-600 font-semibold"
-                              : "text-yellow-600 font-medium"
-                          }
-                        >
-                          {esp.seleccionados} / {esp.aprobados} aprobados{" "}
-                          {esp.cumplida ? "✔ Completada" : "(En progreso)"}
-                        </span>
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </li>
-            ))}
-          </ul>
+          scouts.map((scout) => (
+            <div key={scout.scoutId} className="mb-8">
+              <h3 className="font-semibold text-lg mb-2">{scout.nombreCompleto}</h3>
+              {scout.especialidades.length === 0 ? (
+                <p className="text-sm text-gray-600">Sin especialidades aún.</p>
+              ) : (
+                <div className="overflow-x-auto">
+                  <table className="min-w-full bg-white rounded shadow text-sm">
+                    <thead className="bg-purple-100 text-purple-800">
+                      <tr>
+                        <th className="px-4 py-2 text-left">Especialidad</th>
+                        <th className="px-4 py-2 text-center">Seleccionados</th>
+                        <th className="px-4 py-2 text-center">Aprobados</th>
+                        <th className="px-4 py-2 text-center">Estado</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {scout.especialidades.map((esp) => (
+                        <tr key={esp.especialidadId} className="border-t">
+                          <td className="px-4 py-2">{esp.nombre}</td>
+                          <td className="px-4 py-2 text-center">{esp.seleccionados}</td>
+                          <td className="px-4 py-2 text-center">{esp.aprobados}</td>
+                          <td className="px-4 py-2 text-center">
+                            {esp.cumplida ? (
+                              <span className="text-green-600 font-semibold">✔ Completada</span>
+                            ) : (
+                              <span className="text-yellow-600">En proceso</span>
+                            )}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              )}
+            </div>
+          ))
         )}
       </div>
 

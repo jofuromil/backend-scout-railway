@@ -37,7 +37,8 @@ import CrearEventoGrupo from "./pages/grupo/CrearEventoGrupo";
 import ListaEventosGrupo from "./pages/grupo/ListaEventosGrupo";
 import EnviarMensajesGrupo from "./pages/grupo/EnviarMensajesGrupo";
 import VerMensajesGrupo from "./pages/grupo/VerMensajesGrupo";
-
+import VerPerfilScoutDirigente from "./pages/dirigente/VerPerfilScoutDirigente";
+import GestionGrupoPage from './pages/grupo/GestionGrupoPage';
 
 function App() {
   return (
@@ -75,6 +76,7 @@ function App() {
         <Route path="/kardex" element={<KardexScout />} /> 
         <Route path="/kardex-scout/:scoutId" element={<KardexScout />} />  
         <Route path="/dirigente/kardex/:scoutId" element={<KardexScoutDirigente />} />
+        <Route path="/dirigente/perfil-scout/:scoutId" element={<VerPerfilScoutDirigente />} />
         <Route path="/grupo" element={<PanelGrupoScout />} />
         <Route path="/grupo/scouts" element={<VerScoutsGrupo />} />
         <Route path="/grupo/dirigentes" element={<VerDirigentesGrupo />} />
@@ -83,6 +85,7 @@ function App() {
         <Route path="/grupo/eventos" element={<ListaEventosGrupo />} />
         <Route path="/grupo/mensajes" element={<EnviarMensajesGrupo />} />
         <Route path="/grupo/mensajes/ver" element={<VerMensajesGrupo />} />
+        <Route path="/grupo/gestion" element={<GestionGrupoPage />} />
       </Routes>
     </Router>
   );

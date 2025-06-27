@@ -53,23 +53,31 @@ function MiembrosScoutsUnidad() {
           ) : (
             <ul className="divide-y divide-gray-200">
               {scouts.map((scout) => (
-                <li key={scout.id} className="py-3 flex justify-between items-center">
+                <li key={scout.id} className="py-3 flex flex-wrap gap-2 justify-between items-center">
                   <div>
                     <p className="font-medium">{scout.nombreCompleto}</p>
                     <p className="text-sm text-gray-500">{scout.rama}</p>
                   </div>
-                  <button
-                    onClick={() => navigate(`/dirigente/objetivos-scout/${scout.id}`)}
-                    className="bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700 text-sm"
-                  >
-                    Ver Objetivos
-                  </button>
-                  <button
-                    onClick={() => navigate(`/dirigente/kardex/${scout.id}`)}
-                    className="px-2 py-1 bg-indigo-600 text-white rounded hover:bg-indigo-700 text-sm"
-                  >
-                    Ver Kardex
-                  </button>
+                  <div className="flex gap-2">
+                    <button
+                      onClick={() => navigate(`/dirigente/objetivos-scout/${scout.id}`)}
+                      className="bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700 text-sm"
+                    >
+                      Ver Objetivos
+                    </button>
+                    <button
+                      onClick={() => navigate(`/dirigente/kardex/${scout.id}`)}
+                      className="px-2 py-1 bg-indigo-600 text-white rounded hover:bg-indigo-700 text-sm"
+                    >
+                      Ver Kardex
+                    </button>
+                    <button
+                      onClick={() => navigate(`/dirigente/perfil-scout/${scout.id}`)}
+                      className="px-2 py-1 bg-blue-600 text-white rounded hover:bg-blue-700 text-sm"
+                    >
+                      Ver Perfil
+                    </button>
+                  </div>
                 </li>
               ))}
             </ul>

@@ -3,6 +3,7 @@ using System;
 using BackendScout.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BackendScout.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250626160710_AddCIToUser")]
+    partial class AddCIToUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.1");
@@ -202,33 +205,6 @@ namespace BackendScout.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("FichasMedicas");
-                });
-
-            modelBuilder.Entity("BackendScout.Models.Gestion", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
-
-                    b.Property<bool>("Activa")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<bool>("EstaActiva")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<DateTime?>("FechaCierre")
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime>("FechaInicio")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Nombre")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Gestiones");
                 });
 
             modelBuilder.Entity("BackendScout.Models.GrupoScout", b =>
@@ -487,51 +463,6 @@ namespace BackendScout.Migrations
                     b.HasIndex("UsuarioId");
 
                     b.ToTable("PasswordResetCodes");
-                });
-
-            modelBuilder.Entity("BackendScout.Models.RegistroGestion", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
-
-                    b.Property<bool>("AprobadoDistrito")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<bool>("AprobadoGrupo")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<bool>("AprobadoNacional")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<bool>("EnviadoADistrito")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<bool>("EnviadoANacional")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<DateTime?>("FechaAprobadoDistrito")
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime?>("FechaAprobadoGrupo")
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime?>("FechaAprobadoNacional")
-                        .HasColumnType("TEXT");
-
-                    b.Property<Guid>("GestionId")
-                        .HasColumnType("TEXT");
-
-                    b.Property<Guid>("UsuarioId")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("GestionId");
-
-                    b.HasIndex("UsuarioId");
-
-                    b.ToTable("RegistrosGestion");
                 });
 
             modelBuilder.Entity("BackendScout.Models.Requisito", b =>
@@ -918,25 +849,6 @@ namespace BackendScout.Migrations
                     b.Navigation("Usuario");
                 });
 
-            modelBuilder.Entity("BackendScout.Models.RegistroGestion", b =>
-                {
-                    b.HasOne("BackendScout.Models.Gestion", "Gestion")
-                        .WithMany("Registros")
-                        .HasForeignKey("GestionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("BackendScout.Models.User", "Usuario")
-                        .WithMany()
-                        .HasForeignKey("UsuarioId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Gestion");
-
-                    b.Navigation("Usuario");
-                });
-
             modelBuilder.Entity("BackendScout.Models.Requisito", b =>
                 {
                     b.HasOne("BackendScout.Models.Especialidad", "Especialidad")
@@ -1047,11 +959,6 @@ namespace BackendScout.Migrations
                     b.Navigation("Organizadores");
 
                     b.Navigation("Participantes");
-                });
-
-            modelBuilder.Entity("BackendScout.Models.Gestion", b =>
-                {
-                    b.Navigation("Registros");
                 });
 
             modelBuilder.Entity("BackendScout.Models.GrupoScout", b =>
