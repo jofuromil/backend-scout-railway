@@ -83,6 +83,7 @@ namespace BackendScout.Controllers
             await _registroService.QuitarRegistroDeUsuarioAsync(usuarioId, gestion.Id);
             return Ok(new { mensaje = "Registro eliminado correctamente." });
         }
+        
 
         [HttpGet("registrados")]
         public async Task<IActionResult> ObtenerSoloRegistrados()

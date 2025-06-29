@@ -55,6 +55,7 @@ namespace BackendScout.Services
                 await _context.SaveChangesAsync();
             }
         }
+        
 
         public async Task<List<User>> ObtenerUsuariosRegistradosAsync(int grupoId, Guid gestionId)
         {

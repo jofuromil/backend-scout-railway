@@ -31,5 +31,14 @@ namespace BackendScout.Models
         public bool EnviadoANacional { get; set; } = false;
         public bool AprobadoNacional { get; set; } = false;
         public DateTime? FechaAprobadoNacional { get; set; }
+
+        // Datos estáticos del usuario al ser aprobado a nivel nacional
+        public string? NombreCompleto { get; set; }
+        public string? CI { get; set; }
+        public DateTime? FechaNacimiento { get; set; }
+        public string? Rama { get; set; }
+        public string? UnidadNombre { get; set; }
+        public string? GrupoNombre { get; set; }
+        public string? DistritoNombre { get; set; }
     }
 }

@@ -12,15 +12,15 @@ namespace BackendScout.Data
 
             var distritos = new List<NivelDistrito>
             {
-                new NivelDistrito { Nombre = "La Paz" },
-                new NivelDistrito { Nombre = "Cochabamba" },
-                new NivelDistrito { Nombre = "Santa Cruz" },
-                new NivelDistrito { Nombre = "Oruro" },
-                new NivelDistrito { Nombre = "Potosí" },
-                new NivelDistrito { Nombre = "Chuquisaca" },
-                new NivelDistrito { Nombre = "Tarija" },
-                new NivelDistrito { Nombre = "Beni" },
-                new NivelDistrito { Nombre = "Pando" }
+                new NivelDistrito { Nombre = "PANDO" },
+                new NivelDistrito { Nombre = "BENI" },
+                new NivelDistrito { Nombre = "CHUCHISACA" },
+                new NivelDistrito { Nombre = "COCHABAMBA" },
+                new NivelDistrito { Nombre = "LA PAZ" },
+                new NivelDistrito { Nombre = "ORURO" },
+                new NivelDistrito { Nombre = "POTOSI" },
+                new NivelDistrito { Nombre = "SANTA CRUZ" },
+                new NivelDistrito { Nombre = "TARIJA" }
             };
 
             context.NivelesDistrito.AddRange(distritos);

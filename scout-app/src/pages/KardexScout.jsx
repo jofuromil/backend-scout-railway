@@ -21,6 +21,7 @@ export default function KardexScout() {
           : await axios.get("/api/users/me", config);
         setUsuario(userRes.data);
 
+        console.log(userRes.data)
         const objRes = await axios.get(
           `/api/Objetivo/resumen-scout?usuarioId=${usuarioId}`,
           config
@@ -61,7 +62,7 @@ export default function KardexScout() {
           <p><strong>Unidad:</strong> {usuario.unidad?.nombre || "-"}</p>
           <p><strong>Rama:</strong> {usuario.unidad?.rama || "-"}</p>
           <p><strong>Grupo Scout:</strong> {usuario.unidad?.grupoScout || usuario.unidad?.grupo?.nombre || "-"}</p>
-          <p><strong>Distrito:</strong> {usuario.unidad?.distrito || "-"}</p>
+          <p><strong>Distrito:</strong> {usuario.unidad.distrito || "-"}</p>
         </section>
 
         {/* Resumen de objetivos */}

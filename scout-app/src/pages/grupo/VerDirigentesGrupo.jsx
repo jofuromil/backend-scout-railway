@@ -60,7 +60,7 @@ export default function VerDirigentesGrupo() {
               {dirigentes.map((d) => (
                 <tr key={d.id} className="text-center">
                   <td className="border p-2">{d.nombreCompleto}</td>
-                  <td className="border p-2">{d.unidad}</td>
+                  <td className="border p-2">{d.unidadNombre}</td>
                   <td className="border p-2">{d.rama}</td>
                   <td className="border p-2 space-x-2">
                     <button

@@ -28,6 +28,8 @@ const GestionGrupoPage = () => {
           axios.get(`/api/gruposcout/dirigentes`, config),
           axios.get(`/api/gruposcout/ver-scouts/${usuarioId}`, config),
         ]);
+        console.log("Dirigentes recibidos:", resDirigentes.data);
+        console.log("Scouts recibidos:", resScouts.data);
 
         setDirigentes(resDirigentes.data);
         setScouts(resScouts.data);
@@ -35,7 +37,7 @@ const GestionGrupoPage = () => {
         // Agrupar por unidad
         const dPorUnidad = {};
         resDirigentes.data.forEach((d) => {
-          const unidad = d.unidad || "Sin unidad";
+          const unidad = d.unidadNombre || "Sin unidad";
           if (!dPorUnidad[unidad]) dPorUnidad[unidad] = [];
           dPorUnidad[unidad].push(d);
         });
@@ -43,7 +45,7 @@ const GestionGrupoPage = () => {
 
         const sPorUnidad = {};
         resScouts.data.forEach((s) => {
-          const unidad = s.unidad || "Sin unidad";
+          const unidad = s.unidadNombre || "Sin unidad";
           if (!sPorUnidad[unidad]) sPorUnidad[unidad] = [];
           sPorUnidad[unidad].push(s);
         });
@@ -75,6 +77,7 @@ const GestionGrupoPage = () => {
                   <th className="border px-2 py-1">Fecha Nac.</th>
                   <th className="border px-2 py-1">Género</th>
                   <th className="border px-2 py-1">Rama</th>
+                  <th className="border px-2 py-1">unidad</th>
                   <th className="border px-2 py-1">Profesión</th>
                   <th className="border px-2 py-1">Ocupación</th>
                 </tr>
@@ -87,6 +90,7 @@ const GestionGrupoPage = () => {
                     <td className="border px-2 py-1">{d.fechaNacimiento?.split("T")[0]}</td>
                     <td className="border px-2 py-1">{d.genero}</td>
                     <td className="border px-2 py-1">{d.rama}</td>
+                    <td className="border px-2 py-1">{d.unidadNombre}</td>
                     <td className="border px-2 py-1">{d.profesion || "-"}</td>
                     <td className="border px-2 py-1">{d.ocupacion || "-"}</td>
                   </tr>
@@ -111,6 +115,7 @@ const GestionGrupoPage = () => {
                   <th className="border px-2 py-1">Fecha Nac.</th>
                   <th className="border px-2 py-1">Género</th>
                   <th className="border px-2 py-1">Rama</th>
+                  <th className="border px-2 py-1">unidad</th>
                   <th className="border px-2 py-1">Colegio</th>
                   <th className="border px-2 py-1">Curso</th>
                 </tr>
@@ -123,6 +128,7 @@ const GestionGrupoPage = () => {
                     <td className="border px-2 py-1">{s.fechaNacimiento?.split("T")[0]}</td>
                     <td className="border px-2 py-1">{s.genero}</td>
                     <td className="border px-2 py-1">{s.rama}</td>
+                    <td className="border px-2 py-1">{s.unidadNombre}</td>
                     <td className="border px-2 py-1">{s.institucionEducativa || "-"}</td>
                     <td className="border px-2 py-1">{s.nivelEstudios || "-"}</td>
                   </tr>

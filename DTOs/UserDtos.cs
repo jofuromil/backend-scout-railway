@@ -31,9 +31,11 @@ namespace BackendScout.Dtos
     public string Ciudad { get; set; }
     public string Tipo { get; set; }
     public string Rama { get; set; }
+    public string? UnidadNombre { get; set; }
+
 
     // Campos adicionales del perfil
-    public string? Direccion { get; set; }
+        public string? Direccion { get; set; }
     public string? InstitucionEducativa { get; set; }
     public string? NivelEstudios { get; set; }
     public string? Genero { get; set; }

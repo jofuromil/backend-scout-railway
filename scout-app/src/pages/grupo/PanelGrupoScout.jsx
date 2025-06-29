@@ -61,7 +61,7 @@ export default function PanelGrupoScout() {
           <button onClick={() => navigate("/grupo/dirigentes")} className="border-2 border-violet-600 text-violet-700 px-4 py-2 rounded-full w-full mb-2">
             Ver Dirigentes del Grupo
           </button>
-          <button onClick={() => navigate("/grupo/ver-unidades")} className="border-2 border-violet-600 text-violet-700 px-4 py-2 rounded-full w-full mb-2">
+          <button onClick={() => navigate("/grupo/unidades")} className="border-2 border-violet-600 text-violet-700 px-4 py-2 rounded-full w-full mb-2">
             Ver Unidades del Grupo
           </button>
           <button onClick={() => navigate("/grupo/gestion")} className="border-2 border-violet-600 text-violet-700 px-4 py-2 rounded-full w-full mb-2">

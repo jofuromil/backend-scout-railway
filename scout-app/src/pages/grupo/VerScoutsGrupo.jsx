@@ -6,7 +6,7 @@ import MenuFijo from "../../components/MenuFijoGrupo";
 export default function VerScoutsGrupo() {
   const [scouts, setScouts] = useState([]);
   const navigate = useNavigate();
-
+  
   const token = localStorage.getItem("token");
   const usuarioId = localStorage.getItem("usuarioId");
 
@@ -23,7 +23,7 @@ export default function VerScoutsGrupo() {
 
   // 🔹 Agrupar scouts por Unidad y Rama
   const scoutsAgrupados = scouts.reduce((acc, scout) => {
-    const clave = `${scout.unidadNombre} - ${scout.rama}`;
+    const clave = `${scout.unidad?.nombre} - ${scout.rama}`;
     if (!acc[clave]) acc[clave] = [];
     acc[clave].push(scout);
     return acc;
@@ -44,7 +44,7 @@ export default function VerScoutsGrupo() {
                   <p><strong>Nombre:</strong> {scout.nombreCompleto}</p>
                   <p><strong>Correo:</strong> {scout.correo}</p>
                   <p><strong>Rama:</strong> {scout.rama}</p>
-                  <p><strong>Unidad:</strong> {scout.unidadNombre}</p>
+                  <p><strong>Unidad:</strong> {scout.unidadNombre || "-"}</p>
                   <button
                     onClick={() => navigate(`/dirigente/kardex/${scout.id}`)}
                     className="mt-2 bg-indigo-600 text-white px-3 py-1 rounded hover:bg-indigo-700 text-sm"

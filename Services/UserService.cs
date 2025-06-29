@@ -64,8 +64,9 @@ namespace BackendScout.Services
         public async Task<User?> ObtenerPorIdConUnidad(Guid id)
         {
             return await _context.Users
-                .Include(u => u.Unidad)  // Solo incluimos la unidad, porque GrupoScout y Distrito son string
-                .Include(u => u.GrupoScoutUsuarios) // 👈 incluir la relación
+                .Include(u => u.GrupoScoutUsuarios)
+                .Include(u => u.Unidad)
+                    .ThenInclude(u => u.NivelDistrito) // 👈 incluir la relación
                 .FirstOrDefaultAsync(u => u.Id == id);
         }
 
@@ -270,6 +271,7 @@ namespace BackendScout.Services
                     Ciudad = u.Ciudad,
                     Tipo = u.Tipo,
                     Rama = u.Rama,
+                    UnidadNombre = u.Unidad.Nombre,
                     Direccion = u.Direccion,
                     InstitucionEducativa = u.InstitucionEducativa,
                     NivelEstudios = u.NivelEstudios,
@@ -308,6 +310,7 @@ namespace BackendScout.Services
                     Ciudad = u.Ciudad,
                     Tipo = u.Tipo,
                     Rama = u.Rama,
+                    UnidadNombre = u.Unidad.Nombre,
                     Direccion = u.Direccion,
                     InstitucionEducativa = u.InstitucionEducativa,
                     NivelEstudios = u.NivelEstudios,
