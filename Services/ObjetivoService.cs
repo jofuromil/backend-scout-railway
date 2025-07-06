@@ -63,6 +63,9 @@ namespace BackendScout.Services
                 throw new Exception("El dirigente no pertenece a la misma unidad que el scout.");
 
             seleccion.Validado = true;
+            seleccion.FechaValidacion = DateTime.UtcNow;
+            seleccion.DirigenteValidadorId = dirigenteId;
+
             await _context.SaveChangesAsync();
 
             return true;
@@ -78,20 +81,23 @@ namespace BackendScout.Services
                 query = query.Where(s => s.Validado == soloValidados.Value);
             }
 
-            var historial = await query
-                .Join(_context.ObjetivosEducativos,
-                      seleccion => seleccion.ObjetivoEducativoId,
-                      objetivo => objetivo.Id,
-                      (seleccion, objetivo) => new
-                      {
-                          Id = objetivo.Id, // 👈 Se agrega esto
-                          objetivo.Area,
-                          objetivo.Descripcion,
-                          objetivo.NivelProgresion,
-                          objetivo.Rama,
-                          seleccion.FechaSeleccion,
-                          seleccion.Validado
-                      })
+            var historial = await _context.ObjetivosSeleccionados
+                .Where(s => s.UsuarioId == usuarioId && 
+                        (!soloValidados.HasValue || s.Validado == soloValidados.Value))
+                .Include(s => s.ObjetivoEducativo)
+                .Include(s => s.DirigenteValidador)
+                .Select(s => new
+                {
+                    Id = s.ObjetivoEducativo.Id,
+                    Area = s.ObjetivoEducativo.Area,
+                    Descripcion = s.ObjetivoEducativo.Descripcion,
+                    NivelProgresion = s.ObjetivoEducativo.NivelProgresion,
+                    Rama = s.ObjetivoEducativo.Rama,
+                    FechaSeleccion = s.FechaSeleccion,
+                    Validado = s.Validado,
+                    FechaValidacion = s.FechaValidacion,
+                    DirigenteValidador = s.DirigenteValidador != null ? s.DirigenteValidador.NombreCompleto : null
+                })
                 .OrderBy(o => o.FechaSeleccion)
                 .ToListAsync();
 

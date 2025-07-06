@@ -36,19 +36,26 @@ export default function MisEspecialidades() {
             {especialidades.map((esp) => (
               <li
                 key={esp.especialidadId}
-                className="p-4 border rounded bg-gray-50 shadow flex justify-between items-center"
+                className="p-4 border rounded bg-gray-50 shadow"
               >
-                <div>
-                  <div className="font-semibold">{esp.nombre}</div>
-                  <div className="text-sm text-gray-600">
-                    Requisitos: {esp.seleccionados} seleccionados / {esp.aprobados} aprobados
+                <div className="mb-2">
+                  <div className="font-semibold text-lg">{esp.nombre}</div>
+                  <div className="text-sm text-gray-700">
+                    Requisitos seleccionados: <strong>{esp.seleccionados}</strong> / Aprobados: <strong>{esp.aprobados}</strong>
                   </div>
                 </div>
-                {esp.cumplida ? (
-                  <span className="text-green-600 font-bold">✔ Cumplida</span>
-                ) : (
-                  <span className="text-yellow-600 font-semibold">En progreso</span>
-                )}
+                <div className="text-sm">
+                  {esp.cumplida ? (
+                    <div className="text-green-700 font-semibold">
+                      ✔ Cumplida
+                      {esp.fechaCumplida && (
+                        <span className="block text-xs text-gray-600">Fecha: {new Date(esp.fechaCumplida).toLocaleDateString()}</span>
+                      )}
+                    </div>
+                  ) : (
+                    <span className="text-yellow-700 font-medium">⏳ En progreso</span>
+                  )}
+                </div>
               </li>
             ))}
           </ul>

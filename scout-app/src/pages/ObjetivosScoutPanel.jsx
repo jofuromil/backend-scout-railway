@@ -110,6 +110,9 @@ const ObjetivosScoutPanel = () => {
                   <li key={i} className="bg-yellow-100 p-3 rounded shadow">
                     <strong>{obj.objetivoEducativo?.area || "Área no definida"}</strong>:{" "}
                     {obj.objetivoEducativo?.descripcion || "Sin descripción"}
+                    <p className="text-sm text-gray-600 mt-1">
+                      Selección: {obj.fechaSeleccion ? new Date(obj.fechaSeleccion).toLocaleDateString() : "—"}
+                    </p>
                   </li>
                 ))}
               </ul>
@@ -126,6 +129,11 @@ const ObjetivosScoutPanel = () => {
                 {aprobados.map((obj, i) => (
                   <li key={i} className="bg-green-100 p-3 rounded shadow">
                     <strong>{obj.area || "Área no definida"}</strong>: {obj.descripcion || "Sin descripción"}
+                    <p className="text-sm text-gray-600 mt-1">
+                      📅 Selección: {obj.fechaSeleccion ? new Date(obj.fechaSeleccion).toLocaleDateString() : "—"} • 
+                      Aprobación: {obj.fechaValidacion ? new Date(obj.fechaValidacion).toLocaleDateString() : "—"} • 
+                      👤 Aprobado por: {obj.dirigenteValidador || "—"}
+                    </p>
                   </li>
                 ))}
               </ul>

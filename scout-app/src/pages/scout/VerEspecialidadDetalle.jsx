@@ -26,7 +26,7 @@ export default function VerEspecialidadDetalle() {
       .catch((err) => console.error("Error al cargar especialidad", err));
   }, [id, token]);
 
-  const marcarCumplido = (requisitoId) => {
+  const seleccionarRequisito = (requisitoId) => {
     fetch("http://localhost:8080/api/Especialidades/requisito-cumplido", {
       method: "POST",
       headers: {
@@ -36,10 +36,12 @@ export default function VerEspecialidadDetalle() {
       body: JSON.stringify({ requisitoId })
     })
       .then((res) => {
-        if (!res.ok) throw new Error("Error al marcar requisito");
+        if (!res.ok) throw new Error("Error al seleccionar requisito");
         setRequisitos((prev) =>
           prev.map((r) =>
-            r.requisitoId === requisitoId ? { ...r, seleccionado: true } : r
+            r.requisitoId === requisitoId
+              ? { ...r, seleccionado: true, fechaSeleccion: new Date().toISOString() }
+              : r
           )
         );
       })
@@ -64,19 +66,32 @@ export default function VerEspecialidadDetalle() {
             {requisitos.map((r) => (
               <li
                 key={r.requisitoId}
-                className="p-4 border rounded bg-gray-50 shadow flex justify-between items-center"
+                className="p-4 border rounded bg-gray-50 shadow"
               >
-                <span>{r.texto}</span>
-                {r.seleccionado ? (
-                  <span className="text-green-600 font-semibold">✔ Cumplido</span>
-                ) : (
-                  <button
-                    onClick={() => marcarCumplido(r.requisitoId)}
-                    className="bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700"
-                  >
-                    Marcar cumplido
-                  </button>
-                )}
+                <div className="flex justify-between items-center mb-1">
+                  <span className="font-medium">{r.texto}</span>
+                  {r.fechaAprobacion ? (
+                    <span className="text-green-600 font-semibold">✔ Cumplido</span>
+                  ) : r.seleccionado ? (
+                    <span className="text-yellow-600 font-semibold">🟡 Seleccionado</span>
+                  ) : (
+                    <button
+                      onClick={() => seleccionarRequisito(r.requisitoId)}
+                      className="bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700"
+                    >
+                      Seleccionar
+                    </button>
+                  )}
+                </div>
+
+                <div className="text-sm text-gray-600 mt-1">
+                  {r.fechaSeleccion && (
+                    <p>📅 Seleccionado: {new Date(r.fechaSeleccion).toLocaleDateString()}</p>
+                  )}
+                  {r.fechaAprobacion && (
+                    <p>✅ Aprobado: {new Date(r.fechaAprobacion).toLocaleDateString()}</p>
+                  )}
+                </div>
               </li>
             ))}
           </ul>
@@ -90,3 +105,4 @@ export default function VerEspecialidadDetalle() {
     </div>
   );
 }
+

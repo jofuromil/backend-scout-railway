@@ -86,6 +86,21 @@ namespace BackendScout.Data
                 .WithMany(d => d.Unidades)
                 .HasForeignKey(u => u.NivelDistritoId)
                 .OnDelete(DeleteBehavior.Restrict);
+            
+            // Relación DirigenteValidador ↔ ObjetivoSeleccionado
+            modelBuilder.Entity<ObjetivoSeleccionado>()
+                .HasOne(o => o.DirigenteValidador)
+                .WithMany()
+                .HasForeignKey(o => o.DirigenteValidadorId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            // Relación DirigenteValidador ↔ RequisitoCumplido
+            modelBuilder.Entity<RequisitoCumplido>()
+                .HasOne(r => r.DirigenteValidador)
+                .WithMany()
+                .HasForeignKey(r => r.DirigenteValidadorId)
+                .OnDelete(DeleteBehavior.Restrict);
+
         }
     }
 }

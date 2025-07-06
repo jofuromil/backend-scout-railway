@@ -2,6 +2,8 @@ using BackendScout.Services;
 using Microsoft.AspNetCore.Mvc;
 using BackendScout.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.EntityFrameworkCore;
+using BackendScout.Data; // Asegúrate de tener este using
 
 namespace BackendScout.Controllers
 {
@@ -10,10 +12,12 @@ namespace BackendScout.Controllers
     public class GestionController : ControllerBase
     {
         private readonly GestionService _gestionService;
+        private readonly AppDbContext _context;
 
-        public GestionController(GestionService gestionService)
+        public GestionController(GestionService gestionService, AppDbContext context)
         {
             _gestionService = gestionService;
+            _context = context;
         }
 
         // Solo AdminNacional puede crear nueva gestión
@@ -43,6 +47,26 @@ namespace BackendScout.Controllers
         {
             var historial = await _gestionService.ObtenerHistorialGestionesAsync();
             return Ok(historial);
+        }
+        [HttpPost("crear-activa")]
+        public async Task<IActionResult> CrearGestionActiva()
+        {
+            var existe = await _context.Gestiones.AnyAsync(g => g.EstaActiva);
+            if (existe)
+                return BadRequest("Ya existe una gestión activa.");
+
+            var nuevaGestion = new Gestion
+            {
+                Id = Guid.NewGuid(),
+                Nombre = "2025",
+                FechaInicio = DateTime.UtcNow,
+                EstaActiva = true
+            };
+
+            _context.Gestiones.Add(nuevaGestion);
+            await _context.SaveChangesAsync();
+
+            return Ok(new { mensaje = "Gestión 2025 creada y activada correctamente." });
         }
     }
 }

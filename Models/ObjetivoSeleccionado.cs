@@ -10,5 +10,8 @@ namespace BackendScout.Models
 
         public User Usuario { get; set; } = null!;
         public ObjetivoEducativo ObjetivoEducativo { get; set; } = null!;
+        public DateTime? FechaValidacion { get; set; } // Nueva
+        public Guid? DirigenteValidadorId { get; set; } // Nueva
+        public User? DirigenteValidador { get; set; } // Relación opcional
     }
 }

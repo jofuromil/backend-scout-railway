@@ -32,6 +32,14 @@ export default function RestablecerConCodigo() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-purple-100 p-4">
       <div className="w-full max-w-md p-6 bg-transparent rounded shadow-none">
+        <div className="absolute top-4 left-4">
+          <a
+            href="/"
+            className="text-purple-700 underline text-sm hover:text-purple-900"
+          >
+            ← Volver al inicio
+          </a>
+        </div>
         <h2 className="text-2xl font-bold mb-6 text-center text-purple-800">
           Restablecer Contraseña
         </h2>

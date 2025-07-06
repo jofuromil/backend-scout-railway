@@ -23,8 +23,9 @@ namespace BackendScout.Models
         // Estado de registro
         public bool AprobadoGrupo { get; set; } = false;
         public DateTime? FechaAprobadoGrupo { get; set; }
-
         public bool EnviadoADistrito { get; set; } = false;
+        public DateTime? FechaEnvioDistrito { get; set; }
+
         public bool AprobadoDistrito { get; set; } = false;
         public DateTime? FechaAprobadoDistrito { get; set; }
 

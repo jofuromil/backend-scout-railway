@@ -8,14 +8,10 @@ const GestionGrupoPage = () => {
   const [scouts, setScouts] = useState([]);
   const [agrupadosDirigentes, setAgrupadosDirigentes] = useState({});
   const [agrupadosScouts, setAgrupadosScouts] = useState({});
-  const [usuariosRegistrados, setUsuariosRegistrados] = useState([]);
-  const [usuariosEnviados, setUsuariosEnviados] = useState([]);
 
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
   const usuarioId = localStorage.getItem("usuarioId");
-
-  const gestion = "2025";
 
   useEffect(() => {
     if (!token) return navigate("/login");
@@ -28,23 +24,17 @@ const GestionGrupoPage = () => {
           },
         };
 
-        const [resDirigentes, resScouts, resRegistrados] = await Promise.all([
+        const [resDirigentes, resScouts] = await Promise.all([
           axios.get(`/api/gruposcout/dirigentes`, config),
           axios.get(`/api/gruposcout/ver-scouts/${usuarioId}`, config),
-          axios.get(`/api/registrogestion/registrados/${gestion}`, config)
         ]);
+        console.log("Dirigentes recibidos:", resDirigentes.data);
+        console.log("Scouts recibidos:", resScouts.data);
 
         setDirigentes(resDirigentes.data);
         setScouts(resScouts.data);
 
-        const registrados = resRegistrados.data.map((r) => r.usuarioId);
-        const enviados = resRegistrados.data
-          .filter((r) => r.enviadoADistrito)
-          .map((r) => r.usuarioId);
-
-        setUsuariosRegistrados(registrados);
-        setUsuariosEnviados(enviados);
-
+        // Agrupar por unidad
         const dPorUnidad = {};
         resDirigentes.data.forEach((d) => {
           const unidad = d.unidadNombre || "Sin unidad";
@@ -68,84 +58,12 @@ const GestionGrupoPage = () => {
     fetchData();
   }, [token, usuarioId, navigate]);
 
-  const estaRegistrado = (id) => usuariosRegistrados.includes(id);
-  const estaEnviado = (id) => usuariosEnviados.includes(id);
-
-  const toggleRegistro = async (usuarioId, registrado) => {
-    const config = {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    };
-    try {
-      if (registrado) {
-        await axios.delete(`/api/registrogestion/${gestion}/quitar/${usuarioId}`, config);
-        setUsuariosRegistrados((prev) => prev.filter((id) => id !== usuarioId));
-        setUsuariosEnviados((prev) => prev.filter((id) => id !== usuarioId));
-      } else {
-        await axios.post(`/api/registrogestion/${gestion}/registrar/${usuarioId}`, {}, config);
-        setUsuariosRegistrados((prev) => [...prev, usuarioId]);
-      }
-    } catch (error) {
-      alert("Error al cambiar registro: " + error.response?.data || error.message);
-    }
-  };
-
-  const enviarADistrito = async (usuarioId) => {
-    const config = {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    };
-    try {
-      await axios.put(`/api/registrogestion/${gestion}/enviar-distrito/${usuarioId}`, {}, config);
-      setUsuariosEnviados((prev) => [...prev, usuarioId]);
-    } catch (error) {
-      alert("Error al enviar al distrito: " + error.response?.data || error.message);
-    }
-  };
-
-  const renderTabla = (usuarios) => (
-    <>
-      <th className="border px-2 py-1">Registrado</th>
-      <th className="border px-2 py-1">Acción</th>
-      <th className="border px-2 py-1">Enviado</th>
-    </>
-  );
-
-  const renderFila = (u) => (
-    <>
-      <td className="border px-2 py-1">{estaRegistrado(u.id) ? "Sí" : "No"}</td>
-      <td className="border px-2 py-1">
-        <button
-          className="text-blue-600 underline mr-2"
-          onClick={() => toggleRegistro(u.id, estaRegistrado(u.id))}
-        >
-          {estaRegistrado(u.id) ? "Quitar" : "Registrar"}
-        </button>
-      </td>
-      <td className="border px-2 py-1">
-        {estaRegistrado(u.id) && !estaEnviado(u.id) ? (
-          <button
-            className="text-green-600 underline"
-            onClick={() => enviarADistrito(u.id)}
-          >
-            Enviar
-          </button>
-        ) : estaEnviado(u.id) ? (
-          "✓"
-        ) : (
-          "-"
-        )}
-      </td>
-    </>
-  );
-
   return (
     <div className="p-4 mt-20">
       <MenuFijo />
       <h2 className="text-2xl font-bold mb-6">Gestión del Grupo Scout</h2>
 
+      {/* DIRIGENTES */}
       <h3 className="text-xl font-semibold mt-8 mb-2">Dirigentes por Unidad</h3>
       {Object.keys(agrupadosDirigentes).map((unidad) => (
         <div key={unidad} className="mb-6">
@@ -158,12 +76,10 @@ const GestionGrupoPage = () => {
                   <th className="border px-2 py-1">Nombre</th>
                   <th className="border px-2 py-1">Fecha Nac.</th>
                   <th className="border px-2 py-1">Género</th>
-                  <th className="border px-2 py-1">Grupo Scout</th>
                   <th className="border px-2 py-1">Rama</th>
-                  <th className="border px-2 py-1">Unidad</th>
+                  <th className="border px-2 py-1">unidad</th>
                   <th className="border px-2 py-1">Profesión</th>
                   <th className="border px-2 py-1">Ocupación</th>
-                  {renderTabla()}
                 </tr>
               </thead>
               <tbody>
@@ -173,12 +89,10 @@ const GestionGrupoPage = () => {
                     <td className="border px-2 py-1">{d.nombreCompleto}</td>
                     <td className="border px-2 py-1">{d.fechaNacimiento?.split("T")[0]}</td>
                     <td className="border px-2 py-1">{d.genero}</td>
-                    <td className="border px-2 py-1">{d.gruposcoutNombre}</td>
                     <td className="border px-2 py-1">{d.rama}</td>
                     <td className="border px-2 py-1">{d.unidadNombre}</td>
                     <td className="border px-2 py-1">{d.profesion || "-"}</td>
                     <td className="border px-2 py-1">{d.ocupacion || "-"}</td>
-                    {renderFila(d)}
                   </tr>
                 ))}
               </tbody>
@@ -187,6 +101,7 @@ const GestionGrupoPage = () => {
         </div>
       ))}
 
+      {/* SCOUTS */}
       <h3 className="text-xl font-semibold mt-10 mb-2">Scouts por Unidad</h3>
       {Object.keys(agrupadosScouts).map((unidad) => (
         <div key={unidad} className="mb-6">
@@ -200,10 +115,9 @@ const GestionGrupoPage = () => {
                   <th className="border px-2 py-1">Fecha Nac.</th>
                   <th className="border px-2 py-1">Género</th>
                   <th className="border px-2 py-1">Rama</th>
-                  <th className="border px-2 py-1">Unidad</th>
+                  <th className="border px-2 py-1">unidad</th>
                   <th className="border px-2 py-1">Colegio</th>
                   <th className="border px-2 py-1">Curso</th>
-                  {renderTabla()}
                 </tr>
               </thead>
               <tbody>
@@ -217,7 +131,6 @@ const GestionGrupoPage = () => {
                     <td className="border px-2 py-1">{s.unidadNombre}</td>
                     <td className="border px-2 py-1">{s.institucionEducativa || "-"}</td>
                     <td className="border px-2 py-1">{s.nivelEstudios || "-"}</td>
-                    {renderFila(s)}
                   </tr>
                 ))}
               </tbody>
@@ -235,4 +148,4 @@ const GestionGrupoPage = () => {
   );
 };
 
-export default GestionGrupoPage;
+export default ListaComplteaGrupo;

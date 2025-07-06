@@ -33,7 +33,6 @@ namespace BackendScout.Dtos
     public string Rama { get; set; }
     public string? UnidadNombre { get; set; }
 
-
     // Campos adicionales del perfil
         public string? Direccion { get; set; }
     public string? InstitucionEducativa { get; set; }

@@ -45,6 +45,14 @@ function Registro() {
 
   return (
     <div className="min-h-screen bg-purple-600 text-white flex flex-col justify-center items-center px-6 py-10">
+      <div className="absolute top-4 left-4">
+        <a
+          href="/"
+          className="text-white underline text-sm hover:text-purple-200"
+        >
+          ← Volver al inicio
+        </a>
+      </div>
       <h2 className="text-3xl font-bold mb-8 flex items-center gap-2">
         <UserPlus className="w-8 h-8" />
         Crear cuenta

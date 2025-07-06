@@ -16,5 +16,7 @@ namespace BackendScout.Models
 
         public bool AprobadoPorDirigente { get; set; } = false;
         public DateTime? FechaAprobacion { get; set; }
+        public Guid? DirigenteValidadorId { get; set; }
+        public User? DirigenteValidador { get; set; }
     }
 }

@@ -270,6 +270,7 @@ namespace BackendScout.Services
                     Correo = u.Correo,
                     Ciudad = u.Ciudad,
                     Tipo = u.Tipo,
+                    
                     Rama = u.Rama,
                     UnidadNombre = u.Unidad.Nombre,
                     Direccion = u.Direccion,

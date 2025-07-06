@@ -74,14 +74,16 @@ function PanelDirigente() {
           </div>
         )}
 
-        <div className="mb-6">
-          <button
-            onClick={irAGrupoScout}
-            className="border-2 border-blue-600 text-blue-700 px-4 py-2 rounded-full w-full mb-2"
-          >
-            Ir al Grupo Scout
-          </button>
-        </div>
+        {esAdminGrupoScout && (
+          <div className="mb-6">
+            <button
+              onClick={irAGrupoScout}
+              className="border-2 border-blue-600 text-blue-700 px-4 py-2 rounded-full w-full mb-2"
+            >
+              Ir al Grupo Scout
+            </button>
+          </div>
+        )}
 
         <div className="mb-6">
           <h2 className="text-xl font-semibold mb-2">Unidad Scout</h2>

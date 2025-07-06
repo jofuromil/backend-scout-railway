@@ -68,38 +68,45 @@ public class EspecialidadService
     }
 
     public async Task<object?> ObtenerAvanceEspecialidadAsync(Guid especialidadId, string scoutId)
+{
+    Guid scoutGuid = Guid.Parse(scoutId);
+
+    var especialidad = await _context.Especialidades
+        .Include(e => e.Requisitos)
+        .FirstOrDefaultAsync(e => e.Id == especialidadId);
+    if (especialidad == null) return null;
+
+    var requisitos = especialidad.Requisitos;
+    var requisitosIds = requisitos.Select(r => r.Id).ToList();
+
+    var cumplidos = await _context.RequisitoCumplidos
+        .Where(rc => rc.ScoutId == scoutGuid && requisitosIds.Contains(rc.RequisitoId))
+        .ToListAsync();
+
+    var resultado = requisitos.Select(r =>
     {
-        Guid scoutGuid = Guid.Parse(scoutId);
-
-        var especialidad = await _context.Especialidades
-            .Include(e => e.Requisitos)
-            .FirstOrDefaultAsync(e => e.Id == especialidadId);
-        if (especialidad == null) return null;
-
-        var requisitos = especialidad.Requisitos;
-        var requisitosIds = requisitos.Select(r => r.Id).ToList();
-
-        var cumplidos = await _context.RequisitoCumplidos
-            .Where(rc => rc.ScoutId == scoutGuid && requisitosIds.Contains(rc.RequisitoId))
-            .ToListAsync();
-
-        var resultado = requisitos.Select(r => new
+        var cumplimiento = cumplidos.FirstOrDefault(c => c.RequisitoId == r.Id);
+        return new
         {
             RequisitoId = r.Id,
             Texto = r.Texto,
             Tipo = r.Tipo.ToString(),
-            Seleccionado = cumplidos.Any(c => c.RequisitoId == r.Id),
-            Aprobado = cumplidos.Any(c => c.RequisitoId == r.Id && c.AprobadoPorDirigente)
-        });
-
-        return new
-        {
-            EspecialidadId = especialidad.Id,
-            especialidad.Nombre,
-            especialidad.Descripcion,
-            Requisitos = resultado
+            Seleccionado = cumplimiento != null,
+            FechaSeleccion = cumplimiento?.Fecha,
+            Aprobado = cumplimiento?.AprobadoPorDirigente ?? false,
+            FechaAprobacion = cumplimiento?.FechaAprobacion
         };
-    }
+    });
+
+    return new
+    {
+        EspecialidadId = especialidad.Id,
+        especialidad.Nombre,
+        especialidad.Descripcion,
+        Requisitos = resultado
+    };
+}
+
 
     public async Task<List<Especialidad>> ObtenerPorRamaAsync(string rama)
     {

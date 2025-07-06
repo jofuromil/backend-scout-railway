@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { LogIn } from "lucide-react";
 
-function Inicio() {
+function InicioLogin() {
   const [correo, setCorreo] = useState("");
   const [clave, setClave] = useState("");
   const [mensaje, setMensaje] = useState("");
@@ -105,4 +105,4 @@ function Inicio() {
   );
 }
 
-export default Inicio;
+export default InicioLogin;

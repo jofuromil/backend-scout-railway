@@ -56,7 +56,8 @@ namespace BackendScout.Controllers
                     Profesion = r.Usuario.Profesion,
                     Ocupacion = r.Usuario.Ocupacion,
                     Registrado = r.AprobadoGrupo,
-                    FechaRegistro = r.FechaAprobadoGrupo
+                    FechaRegistro = r.FechaAprobadoGrupo,
+                    EstadoRegistro = r.AprobadoGrupo ? "REGISTRADO" : "NINGUNO" // 👈 AGREGA ESTO
                 }).ToList();
 
             return Ok(resultado);
@@ -83,6 +84,36 @@ namespace BackendScout.Controllers
             await _registroService.QuitarRegistroDeUsuarioAsync(usuarioId, gestion.Id);
             return Ok(new { mensaje = "Registro eliminado correctamente." });
         }
+        [HttpPost("enviar-distrito/{usuarioId}")]
+        public async Task<IActionResult> EnviarRegistroADistrito(Guid usuarioId)
+        {
+            var gestion = await _gestionService.ObtenerGestionActivaAsync();
+            if (gestion == null)
+                return NotFound("No hay gestión activa.");
+
+            try
+            {
+                await _registroService.EnviarRegistroADistritoAsync(usuarioId, gestion.Id);
+                return Ok(new { mensaje = "Registro enviado al distrito correctamente." });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { error = ex.Message });
+            }
+        }
+        [HttpGet("resumen-grupo/{adminId}")]
+        public async Task<IActionResult> ObtenerResumenGrupo(Guid adminId)
+        {
+            try
+            {
+                var lista = await _registroService.ObtenerResumenDeGrupoAsync(adminId);
+                return Ok(lista);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { error = ex.Message });
+            }
+        }
         
 
         [HttpGet("registrados")]
@@ -100,6 +131,35 @@ namespace BackendScout.Controllers
                 return NotFound("No hay gestión activa.");
 
             var usuarios = await _registroService.ObtenerUsuariosRegistradosAsync(grupoId.Value, gestion.Id);
+
+            var resultado = usuarios.Select(u => new
+            {
+                u.Id,
+                u.NombreCompleto,
+                u.CI,
+                u.FechaNacimiento,
+                u.Genero,
+                u.Rama,
+                Unidad = u.Unidad?.Nombre,
+                Colegio = u.InstitucionEducativa,
+                Curso = u.NivelEstudios,
+                Profesion = u.Profesion,
+                Ocupacion = u.Ocupacion
+            });
+
+            return Ok(resultado);
+        }
+        [HttpGet("registrados/{gestion}")]
+        public async Task<IActionResult> ObtenerUsuariosRegistradosPorGestion(int gestion)
+        {
+            var userId = new Guid(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            var dirigente = await _userService.ObtenerUsuarioPorIdAsync(userId);
+            var grupoId = dirigente?.GrupoScoutUsuarios?.FirstOrDefault()?.GrupoScoutId;
+
+            if (grupoId == null || grupoId == 0)
+                return BadRequest("No pertenece a ningún grupo scout.");
+
+            var usuarios = await _registroService.ObtenerUsuariosRegistradosPorGestion(grupoId.Value, gestion);
 
             var resultado = usuarios.Select(u => new
             {
