@@ -15,7 +15,10 @@ export default function MisEspecialidades() {
         if (!res.ok) throw new Error("Error al obtener avances");
         return res.json();
       })
-      .then((data) => setEspecialidades(data))
+      .then((data) => {
+        setEspecialidades(data)
+        console.log("Avances:", data);
+      })
       .catch((err) => console.error(err));
   }, [token]);
 
@@ -49,7 +52,9 @@ export default function MisEspecialidades() {
                     <div className="text-green-700 font-semibold">
                       ✔ Cumplida
                       {esp.fechaCumplida && (
-                        <span className="block text-xs text-gray-600">Fecha: {new Date(esp.fechaCumplida).toLocaleDateString()}</span>
+                        <div className="text-xs text-gray-600 mt-1">
+                          📅 Completada el {new Date(esp.fechaCumplida).toLocaleDateString()}
+                        </div>
                       )}
                     </div>
                   ) : (
