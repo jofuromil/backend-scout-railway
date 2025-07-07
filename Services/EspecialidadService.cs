@@ -44,34 +44,37 @@ public class EspecialidadService
     }
 
     public async Task<List<ResumenEspecialidadDto>> ObtenerResumenPorScoutAsync(string scoutId)
-    {
-        Guid scoutGuid = Guid.Parse(scoutId);
+{
+    Guid scoutGuid = Guid.Parse(scoutId);
 
-        var cumplidos = await _context.RequisitoCumplidos
-            .Where(rc => rc.ScoutId == scoutGuid)
-            .Include(rc => rc.Requisito)
-            .ThenInclude(r => r.Especialidad)
-            .ToListAsync();
+    var cumplidos = await _context.RequisitoCumplidos
+        .Where(rc => rc.ScoutId == scoutGuid)
+        .Include(rc => rc.Requisito)
+        .ThenInclude(r => r.Especialidad)
+        .ToListAsync();
 
-        var resumen = cumplidos
-            .GroupBy(rc => rc.Requisito.Especialidad)
-            .Select(g => new ResumenEspecialidadDto
-            {
-                EspecialidadId = g.Key.Id,
-                Nombre = g.Key.Nombre,
-                Seleccionados = g.Count(),
-                Aprobados = g.Count(rc => rc.AprobadoPorDirigente),
-                Cumplida = g.All(rc => rc.AprobadoPorDirigente),
-                FechaCumplida = g.All(rc => rc.AprobadoPorDirigente)
-                    ? g.Max(rc => rc.FechaAprobacion)
-                    : null,
-                TotalRequisitos = g.Key.Requisitos.Count,
-                ImagenUrl = $"/img/especialidades/{g.Key.Rama.ToUpper()}/{g.Key.ImagenUrl}",
-            })
-            .ToList();
+    var resumen = cumplidos
+        .GroupBy(rc => rc.Requisito.Especialidad)
+        .Select(g => new ResumenEspecialidadDto
+        {
+            EspecialidadId = g.Key.Id,
+            Nombre = g.Key.Nombre,
+            Seleccionados = g.Count(),
+            Aprobados = g.Count(rc => rc.AprobadoPorDirigente),
+            Cumplida = g.All(rc => rc.AprobadoPorDirigente),
+            FechaCumplida = g.All(rc => rc.AprobadoPorDirigente)
+                ? g.Max(rc => rc.FechaAprobacion)
+                : null,
+            TotalRequisitos = g.Key.Requisitos.Count,
+            ImagenUrl = g.Key.ImagenUrl.StartsWith("/img/")
+                ? g.Key.ImagenUrl
+                : $"/img/especialidades/{g.Key.Rama.ToLower()}/{g.Key.ImagenUrl}"
+        })
+        .ToList();
 
-        return resumen;
-    }
+    return resumen;
+}
+
 
     public async Task<object?> ObtenerAvanceEspecialidadAsync(Guid especialidadId, string scoutId)
     {
