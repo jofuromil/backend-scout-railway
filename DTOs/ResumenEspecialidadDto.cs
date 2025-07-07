@@ -7,4 +7,5 @@ public class ResumenEspecialidadDto
     public int Aprobados { get; set; }
     public bool Cumplida { get; set; }
     public DateTime? FechaCumplida { get; set; }
+    public string? ImagenUrl { get; set; }
 }

@@ -65,16 +65,16 @@ public class EspecialidadService
                 FechaCumplida = g.All(rc => rc.AprobadoPorDirigente)
                     ? g.Max(rc => rc.FechaAprobacion)
                     : null,
-                TotalRequisitos = g.Key.Requisitos.Count
+                TotalRequisitos = g.Key.Requisitos.Count,
+                ImagenUrl = $"/img/especialidades/{g.Key.Rama.ToUpper()}/{g.Key.ImagenUrl}",
             })
             .ToList();
 
         return resumen;
     }
 
-
     public async Task<object?> ObtenerAvanceEspecialidadAsync(Guid especialidadId, string scoutId)
-{
+    {
     Guid scoutGuid = Guid.Parse(scoutId);
 
     var especialidad = await _context.Especialidades
@@ -109,9 +109,10 @@ public class EspecialidadService
         EspecialidadId = especialidad.Id,
         especialidad.Nombre,
         especialidad.Descripcion,
+        especialidad.ImagenUrl,
         Requisitos = resultado
     };
-}
+    }
 
 
     public async Task<List<Especialidad>> ObtenerPorRamaAsync(string rama)
@@ -121,32 +122,32 @@ public class EspecialidadService
             .ToListAsync();
     }
 
-public async Task<List<ResumenEspecialidadDto>> ObtenerResumenScout(Guid scoutId)
-{
-    var cumplidos = await _context.RequisitoCumplidos
-        .Where(r => r.ScoutId == scoutId)
-        .Include(rc => rc.Requisito)
-        .ThenInclude(r => r.Especialidad)
-        .ToListAsync();
+    public async Task<List<ResumenEspecialidadDto>> ObtenerResumenScout(Guid scoutId)
+    {
+        var cumplidos = await _context.RequisitoCumplidos
+            .Where(r => r.ScoutId == scoutId)
+            .Include(rc => rc.Requisito)
+            .ThenInclude(r => r.Especialidad)
+            .ToListAsync();
 
-    var resumen = cumplidos
-        .GroupBy(c => c.Requisito.Especialidad)
-        .Select(g => new ResumenEspecialidadDto
-        {
-            EspecialidadId = g.Key.Id,
-            Nombre = g.Key.Nombre,
-            Seleccionados = g.Count(),
-            Aprobados = g.Count(r => r.AprobadoPorDirigente),
-            Cumplida = g.All(r => r.AprobadoPorDirigente),
-            FechaCumplida = g.All(r => r.AprobadoPorDirigente)
-                ? g.Where(r => r.FechaAprobacion != null).Max(r => r.FechaAprobacion)
-                : null
+        var resumen = cumplidos
+            .GroupBy(c => c.Requisito.Especialidad)
+            .Select(g => new ResumenEspecialidadDto
+            {
+                EspecialidadId = g.Key.Id,
+                Nombre = g.Key.Nombre,
+                Seleccionados = g.Count(),
+                Aprobados = g.Count(r => r.AprobadoPorDirigente),
+                Cumplida = g.All(r => r.AprobadoPorDirigente),
+                FechaCumplida = g.All(r => r.AprobadoPorDirigente)
+                    ? g.Where(r => r.FechaAprobacion != null).Max(r => r.FechaAprobacion)
+                    : null,
+                ImagenUrl = g.Key.ImagenUrl // ✅ agregamos esto
+            })
+            .ToList();
 
-        })
-        .ToList();
-
-    return resumen;
-}
+        return resumen;
+    }
 
 
     public async Task<Especialidad?> ObtenerPorIdConRequisitosAsync(Guid id)

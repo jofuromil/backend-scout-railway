@@ -19,9 +19,11 @@ export default function VerEspecialidadDetalle() {
       .then((data) => {
         setEspecialidad({
           nombre: data.nombre,
-          descripcion: data.descripcion
+          descripcion: data.descripcion,
+          imagenUrl: data.imagenUrl
         });
         setRequisitos(data.requisitos);
+        console.log(data);
       })
       .catch((err) => console.error("Error al cargar especialidad", err));
   }, [id, token]);
@@ -56,8 +58,18 @@ export default function VerEspecialidadDetalle() {
       </div>
 
       <div className="max-w-3xl mx-auto pt-6 px-4">
-        <h2 className="text-2xl font-bold mb-2">{especialidad?.nombre}</h2>
-        <p className="mb-4">{especialidad?.descripcion}</p>
+        {especialidad?.imagenUrl && (
+          <div className="flex justify-center mb-4">
+            <img
+              src={especialidad.imagenUrl}
+              alt={especialidad.nombre}
+              className="w-32 h-32 rounded-full object-cover"
+            />
+          </div>
+        )}
+
+        <h2 className="text-2xl font-bold mb-2 text-center">{especialidad?.nombre}</h2>
+        <p className="mb-4 text-center">{especialidad?.descripcion}</p>
 
         {requisitos.length === 0 ? (
           <p className="text-gray-600">No hay requisitos disponibles.</p>
@@ -105,4 +117,3 @@ export default function VerEspecialidadDetalle() {
     </div>
   );
 }
-

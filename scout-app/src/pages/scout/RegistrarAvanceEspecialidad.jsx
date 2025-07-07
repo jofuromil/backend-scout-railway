@@ -46,7 +46,16 @@ export default function RegistrarAvanceEspecialidad() {
                 key={esp.id}
                 className="p-4 border rounded bg-gray-50 shadow flex justify-between items-center"
               >
-                <span>{esp.nombre}</span>
+                <div className="flex items-center gap-3">
+                  {esp.imagenUrl && (
+                    <img
+                      src={esp.imagenUrl}
+                      alt={esp.nombre}
+                      className="w-12 h-12 rounded-full object-cover"
+                    />
+                  )}
+                  <span className="text-lg font-medium">{esp.nombre}</span>
+                </div>
                 <button
                   onClick={() => verDetalle(esp.id)}
                   className="bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700"
