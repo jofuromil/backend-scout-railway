@@ -1,47 +1,47 @@
 {
   "Files": [
     {
-      "Id": "D:\\SistemaScout\\BackendScout\\wwwroot\\dashboard-dirigente.html",
+      "Id": "D:\\SistemaScout\\BackendDeploy\\wwwroot\\dashboard-dirigente.html",
       "PackagePath": "staticwebassets\\dashboard-dirigente.html"
     },
     {
-      "Id": "D:\\SistemaScout\\BackendScout\\wwwroot\\dashboard-scout.html",
+      "Id": "D:\\SistemaScout\\BackendDeploy\\wwwroot\\dashboard-scout.html",
       "PackagePath": "staticwebassets\\dashboard-scout.html"
     },
     {
-      "Id": "D:\\SistemaScout\\BackendScout\\wwwroot\\index.html",
+      "Id": "D:\\SistemaScout\\BackendDeploy\\wwwroot\\index.html",
       "PackagePath": "staticwebassets\\index.html"
     },
     {
-      "Id": "D:\\SistemaScout\\BackendScout\\wwwroot\\login.html",
+      "Id": "D:\\SistemaScout\\BackendDeploy\\wwwroot\\login.html",
       "PackagePath": "staticwebassets\\login.html"
     },
     {
-      "Id": "D:\\SistemaScout\\BackendScout\\wwwroot\\login.js",
+      "Id": "D:\\SistemaScout\\BackendDeploy\\wwwroot\\login.js",
       "PackagePath": "staticwebassets\\login.js"
     },
     {
-      "Id": "D:\\SistemaScout\\BackendScout\\wwwroot\\objetivos-nivel.html",
+      "Id": "D:\\SistemaScout\\BackendDeploy\\wwwroot\\objetivos-nivel.html",
       "PackagePath": "staticwebassets\\objetivos-nivel.html"
     },
     {
-      "Id": "D:\\SistemaScout\\BackendScout\\wwwroot\\objetivos-scout.html",
+      "Id": "D:\\SistemaScout\\BackendDeploy\\wwwroot\\objetivos-scout.html",
       "PackagePath": "staticwebassets\\objetivos-scout.html"
     },
     {
-      "Id": "D:\\SistemaScout\\BackendScout\\wwwroot\\objetivos-seleccionados.html",
+      "Id": "D:\\SistemaScout\\BackendDeploy\\wwwroot\\objetivos-seleccionados.html",
       "PackagePath": "staticwebassets\\objetivos-seleccionados.html"
     },
     {
-      "Id": "D:\\SistemaScout\\BackendScout\\wwwroot\\panel-unidad.html",
+      "Id": "D:\\SistemaScout\\BackendDeploy\\wwwroot\\panel-unidad.html",
       "PackagePath": "staticwebassets\\panel-unidad.html"
     },
     {
-      "Id": "D:\\SistemaScout\\BackendScout\\wwwroot\\register.html",
+      "Id": "D:\\SistemaScout\\BackendDeploy\\wwwroot\\register.html",
       "PackagePath": "staticwebassets\\register.html"
     },
     {
-      "Id": "D:\\SistemaScout\\BackendScout\\wwwroot\\unidades.html",
+      "Id": "D:\\SistemaScout\\BackendDeploy\\wwwroot\\unidades.html",
       "PackagePath": "staticwebassets\\unidades.html"
     },
     {

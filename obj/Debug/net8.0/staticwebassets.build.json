@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "AqRLD6SVV2K074sfOGDc50p+uH5xDBK1oFPG5rnXQ2Q=",
+  "Hash": "SPB4ViInEI31o0PHPzPpDXcmWeGabH2KNfpiydCioMk=",
   "Source": "BackendScout",
   "BasePath": "_content/BackendScout",
   "Mode": "Default",
@@ -10,17 +10,17 @@
     {
       "Name": "BackendScout\\wwwroot",
       "Source": "BackendScout",
-      "ContentRoot": "D:\\SistemaScout\\BackendScout\\wwwroot\\",
+      "ContentRoot": "D:\\SistemaScout\\BackendDeploy\\wwwroot\\",
       "BasePath": "_content/BackendScout",
       "Pattern": "**"
     }
   ],
   "Assets": [
     {
-      "Identity": "D:\\SistemaScout\\BackendScout\\wwwroot\\dashboard-dirigente.html",
+      "Identity": "D:\\SistemaScout\\BackendDeploy\\wwwroot\\dashboard-dirigente.html",
       "SourceId": "BackendScout",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\SistemaScout\\BackendScout\\wwwroot\\",
+      "ContentRoot": "D:\\SistemaScout\\BackendDeploy\\wwwroot\\",
       "BasePath": "_content/BackendScout",
       "RelativePath": "dashboard-dirigente#[.{fingerprint}]?.html",
       "AssetKind": "All",
@@ -38,10 +38,10 @@
       "OriginalItemSpec": "wwwroot\\dashboard-dirigente.html"
     },
     {
-      "Identity": "D:\\SistemaScout\\BackendScout\\wwwroot\\dashboard-scout.html",
+      "Identity": "D:\\SistemaScout\\BackendDeploy\\wwwroot\\dashboard-scout.html",
       "SourceId": "BackendScout",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\SistemaScout\\BackendScout\\wwwroot\\",
+      "ContentRoot": "D:\\SistemaScout\\BackendDeploy\\wwwroot\\",
       "BasePath": "_content/BackendScout",
       "RelativePath": "dashboard-scout#[.{fingerprint}]?.html",
       "AssetKind": "All",
@@ -59,10 +59,10 @@
       "OriginalItemSpec": "wwwroot\\dashboard-scout.html"
     },
     {
-      "Identity": "D:\\SistemaScout\\BackendScout\\wwwroot\\index.html",
+      "Identity": "D:\\SistemaScout\\BackendDeploy\\wwwroot\\index.html",
       "SourceId": "BackendScout",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\SistemaScout\\BackendScout\\wwwroot\\",
+      "ContentRoot": "D:\\SistemaScout\\BackendDeploy\\wwwroot\\",
       "BasePath": "_content/BackendScout",
       "RelativePath": "index#[.{fingerprint}]?.html",
       "AssetKind": "All",
@@ -80,10 +80,10 @@
       "OriginalItemSpec": "wwwroot\\index.html"
     },
     {
-      "Identity": "D:\\SistemaScout\\BackendScout\\wwwroot\\login.html",
+      "Identity": "D:\\SistemaScout\\BackendDeploy\\wwwroot\\login.html",
       "SourceId": "BackendScout",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\SistemaScout\\BackendScout\\wwwroot\\",
+      "ContentRoot": "D:\\SistemaScout\\BackendDeploy\\wwwroot\\",
       "BasePath": "_content/BackendScout",
       "RelativePath": "login#[.{fingerprint}]?.html",
       "AssetKind": "All",
@@ -101,10 +101,10 @@
       "OriginalItemSpec": "wwwroot\\login.html"
     },
     {
-      "Identity": "D:\\SistemaScout\\BackendScout\\wwwroot\\login.js",
+      "Identity": "D:\\SistemaScout\\BackendDeploy\\wwwroot\\login.js",
       "SourceId": "BackendScout",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\SistemaScout\\BackendScout\\wwwroot\\",
+      "ContentRoot": "D:\\SistemaScout\\BackendDeploy\\wwwroot\\",
       "BasePath": "_content/BackendScout",
       "RelativePath": "login#[.{fingerprint}]?.js",
       "AssetKind": "All",
@@ -122,10 +122,10 @@
       "OriginalItemSpec": "wwwroot\\login.js"
     },
     {
-      "Identity": "D:\\SistemaScout\\BackendScout\\wwwroot\\objetivos-nivel.html",
+      "Identity": "D:\\SistemaScout\\BackendDeploy\\wwwroot\\objetivos-nivel.html",
       "SourceId": "BackendScout",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\SistemaScout\\BackendScout\\wwwroot\\",
+      "ContentRoot": "D:\\SistemaScout\\BackendDeploy\\wwwroot\\",
       "BasePath": "_content/BackendScout",
       "RelativePath": "objetivos-nivel#[.{fingerprint}]?.html",
       "AssetKind": "All",
@@ -143,10 +143,10 @@
       "OriginalItemSpec": "wwwroot\\objetivos-nivel.html"
     },
     {
-      "Identity": "D:\\SistemaScout\\BackendScout\\wwwroot\\objetivos-scout.html",
+      "Identity": "D:\\SistemaScout\\BackendDeploy\\wwwroot\\objetivos-scout.html",
       "SourceId": "BackendScout",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\SistemaScout\\BackendScout\\wwwroot\\",
+      "ContentRoot": "D:\\SistemaScout\\BackendDeploy\\wwwroot\\",
       "BasePath": "_content/BackendScout",
       "RelativePath": "objetivos-scout#[.{fingerprint}]?.html",
       "AssetKind": "All",
@@ -164,10 +164,10 @@
       "OriginalItemSpec": "wwwroot\\objetivos-scout.html"
     },
     {
-      "Identity": "D:\\SistemaScout\\BackendScout\\wwwroot\\objetivos-seleccionados.html",
+      "Identity": "D:\\SistemaScout\\BackendDeploy\\wwwroot\\objetivos-seleccionados.html",
       "SourceId": "BackendScout",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\SistemaScout\\BackendScout\\wwwroot\\",
+      "ContentRoot": "D:\\SistemaScout\\BackendDeploy\\wwwroot\\",
       "BasePath": "_content/BackendScout",
       "RelativePath": "objetivos-seleccionados#[.{fingerprint}]?.html",
       "AssetKind": "All",
@@ -185,10 +185,10 @@
       "OriginalItemSpec": "wwwroot\\objetivos-seleccionados.html"
     },
     {
-      "Identity": "D:\\SistemaScout\\BackendScout\\wwwroot\\panel-unidad.html",
+      "Identity": "D:\\SistemaScout\\BackendDeploy\\wwwroot\\panel-unidad.html",
       "SourceId": "BackendScout",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\SistemaScout\\BackendScout\\wwwroot\\",
+      "ContentRoot": "D:\\SistemaScout\\BackendDeploy\\wwwroot\\",
       "BasePath": "_content/BackendScout",
       "RelativePath": "panel-unidad#[.{fingerprint}]?.html",
       "AssetKind": "All",
@@ -206,10 +206,10 @@
       "OriginalItemSpec": "wwwroot\\panel-unidad.html"
     },
     {
-      "Identity": "D:\\SistemaScout\\BackendScout\\wwwroot\\register.html",
+      "Identity": "D:\\SistemaScout\\BackendDeploy\\wwwroot\\register.html",
       "SourceId": "BackendScout",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\SistemaScout\\BackendScout\\wwwroot\\",
+      "ContentRoot": "D:\\SistemaScout\\BackendDeploy\\wwwroot\\",
       "BasePath": "_content/BackendScout",
       "RelativePath": "register#[.{fingerprint}]?.html",
       "AssetKind": "All",
@@ -227,10 +227,10 @@
       "OriginalItemSpec": "wwwroot\\register.html"
     },
     {
-      "Identity": "D:\\SistemaScout\\BackendScout\\wwwroot\\unidades.html",
+      "Identity": "D:\\SistemaScout\\BackendDeploy\\wwwroot\\unidades.html",
       "SourceId": "BackendScout",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\SistemaScout\\BackendScout\\wwwroot\\",
+      "ContentRoot": "D:\\SistemaScout\\BackendDeploy\\wwwroot\\",
       "BasePath": "_content/BackendScout",
       "RelativePath": "unidades#[.{fingerprint}]?.html",
       "AssetKind": "All",
@@ -251,7 +251,7 @@
   "Endpoints": [
     {
       "Route": "dashboard-dirigente.fg7yo8kdov.html",
-      "AssetFile": "D:\\SistemaScout\\BackendScout\\wwwroot\\dashboard-dirigente.html",
+      "AssetFile": "D:\\SistemaScout\\BackendDeploy\\wwwroot\\dashboard-dirigente.html",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -296,7 +296,7 @@
     },
     {
       "Route": "dashboard-dirigente.html",
-      "AssetFile": "D:\\SistemaScout\\BackendScout\\wwwroot\\dashboard-dirigente.html",
+      "AssetFile": "D:\\SistemaScout\\BackendDeploy\\wwwroot\\dashboard-dirigente.html",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -333,7 +333,7 @@
     },
     {
       "Route": "dashboard-scout.473ekuxhsa.html",
-      "AssetFile": "D:\\SistemaScout\\BackendScout\\wwwroot\\dashboard-scout.html",
+      "AssetFile": "D:\\SistemaScout\\BackendDeploy\\wwwroot\\dashboard-scout.html",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -378,7 +378,7 @@
     },
     {
       "Route": "dashboard-scout.html",
-      "AssetFile": "D:\\SistemaScout\\BackendScout\\wwwroot\\dashboard-scout.html",
+      "AssetFile": "D:\\SistemaScout\\BackendDeploy\\wwwroot\\dashboard-scout.html",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -415,7 +415,7 @@
     },
     {
       "Route": "index.9uljgtk2zq.html",
-      "AssetFile": "D:\\SistemaScout\\BackendScout\\wwwroot\\index.html",
+      "AssetFile": "D:\\SistemaScout\\BackendDeploy\\wwwroot\\index.html",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -460,7 +460,7 @@
     },
     {
       "Route": "index.html",
-      "AssetFile": "D:\\SistemaScout\\BackendScout\\wwwroot\\index.html",
+      "AssetFile": "D:\\SistemaScout\\BackendDeploy\\wwwroot\\index.html",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -497,7 +497,7 @@
     },
     {
       "Route": "login.fyx24d907c.html",
-      "AssetFile": "D:\\SistemaScout\\BackendScout\\wwwroot\\login.html",
+      "AssetFile": "D:\\SistemaScout\\BackendDeploy\\wwwroot\\login.html",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -542,7 +542,7 @@
     },
     {
       "Route": "login.html",
-      "AssetFile": "D:\\SistemaScout\\BackendScout\\wwwroot\\login.html",
+      "AssetFile": "D:\\SistemaScout\\BackendDeploy\\wwwroot\\login.html",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -579,7 +579,7 @@
     },
     {
       "Route": "login.js",
-      "AssetFile": "D:\\SistemaScout\\BackendScout\\wwwroot\\login.js",
+      "AssetFile": "D:\\SistemaScout\\BackendDeploy\\wwwroot\\login.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -616,7 +616,7 @@
     },
     {
       "Route": "login.xcahzo5c69.js",
-      "AssetFile": "D:\\SistemaScout\\BackendScout\\wwwroot\\login.js",
+      "AssetFile": "D:\\SistemaScout\\BackendDeploy\\wwwroot\\login.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -661,7 +661,7 @@
     },
     {
       "Route": "objetivos-nivel.html",
-      "AssetFile": "D:\\SistemaScout\\BackendScout\\wwwroot\\objetivos-nivel.html",
+      "AssetFile": "D:\\SistemaScout\\BackendDeploy\\wwwroot\\objetivos-nivel.html",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -698,7 +698,7 @@
     },
     {
       "Route": "objetivos-nivel.v8pz61iwpy.html",
-      "AssetFile": "D:\\SistemaScout\\BackendScout\\wwwroot\\objetivos-nivel.html",
+      "AssetFile": "D:\\SistemaScout\\BackendDeploy\\wwwroot\\objetivos-nivel.html",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -743,7 +743,7 @@
     },
     {
       "Route": "objetivos-scout.gh24o87rr3.html",
-      "AssetFile": "D:\\SistemaScout\\BackendScout\\wwwroot\\objetivos-scout.html",
+      "AssetFile": "D:\\SistemaScout\\BackendDeploy\\wwwroot\\objetivos-scout.html",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -788,7 +788,7 @@
     },
     {
       "Route": "objetivos-scout.html",
-      "AssetFile": "D:\\SistemaScout\\BackendScout\\wwwroot\\objetivos-scout.html",
+      "AssetFile": "D:\\SistemaScout\\BackendDeploy\\wwwroot\\objetivos-scout.html",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -825,7 +825,7 @@
     },
     {
       "Route": "objetivos-seleccionados.html",
-      "AssetFile": "D:\\SistemaScout\\BackendScout\\wwwroot\\objetivos-seleccionados.html",
+      "AssetFile": "D:\\SistemaScout\\BackendDeploy\\wwwroot\\objetivos-seleccionados.html",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -862,7 +862,7 @@
     },
     {
       "Route": "objetivos-seleccionados.qwb5osp540.html",
-      "AssetFile": "D:\\SistemaScout\\BackendScout\\wwwroot\\objetivos-seleccionados.html",
+      "AssetFile": "D:\\SistemaScout\\BackendDeploy\\wwwroot\\objetivos-seleccionados.html",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -907,7 +907,7 @@
     },
     {
       "Route": "panel-unidad.7ke83t8zu4.html",
-      "AssetFile": "D:\\SistemaScout\\BackendScout\\wwwroot\\panel-unidad.html",
+      "AssetFile": "D:\\SistemaScout\\BackendDeploy\\wwwroot\\panel-unidad.html",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -952,7 +952,7 @@
     },
     {
       "Route": "panel-unidad.html",
-      "AssetFile": "D:\\SistemaScout\\BackendScout\\wwwroot\\panel-unidad.html",
+      "AssetFile": "D:\\SistemaScout\\BackendDeploy\\wwwroot\\panel-unidad.html",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -989,7 +989,7 @@
     },
     {
       "Route": "register.html",
-      "AssetFile": "D:\\SistemaScout\\BackendScout\\wwwroot\\register.html",
+      "AssetFile": "D:\\SistemaScout\\BackendDeploy\\wwwroot\\register.html",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -1026,7 +1026,7 @@
     },
     {
       "Route": "register.u9j8m2664h.html",
-      "AssetFile": "D:\\SistemaScout\\BackendScout\\wwwroot\\register.html",
+      "AssetFile": "D:\\SistemaScout\\BackendDeploy\\wwwroot\\register.html",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -1071,7 +1071,7 @@
     },
     {
       "Route": "unidades.fvnm8uh3nj.html",
-      "AssetFile": "D:\\SistemaScout\\BackendScout\\wwwroot\\unidades.html",
+      "AssetFile": "D:\\SistemaScout\\BackendDeploy\\wwwroot\\unidades.html",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -1116,7 +1116,7 @@
     },
     {
       "Route": "unidades.html",
-      "AssetFile": "D:\\SistemaScout\\BackendScout\\wwwroot\\unidades.html",
+      "AssetFile": "D:\\SistemaScout\\BackendDeploy\\wwwroot\\unidades.html",
       "Selectors": [],
       "ResponseHeaders": [
         {
