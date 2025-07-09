@@ -12,7 +12,6 @@ using System.Text.Json.Serialization;
 using System.Security.Claims;
 using Microsoft.Extensions.FileProviders;
 
-
 // ✅ Activar licencia QuestPDF
 QuestPDF.Settings.License = LicenseType.Community;
 
@@ -95,9 +94,12 @@ builder.Services.AddScoped<PasswordResetService>();
 builder.Services.AddScoped<RegistroGestionService>();
 builder.Services.AddScoped<GestionService>();
 
-// ✅ Base de datos
+// ✅ Obtener cadena de conexión (desde entorno o appsettings)
+var connectionString = Environment.GetEnvironmentVariable("DATABASE_URL")
+    ?? builder.Configuration.GetConnectionString("DefaultConnection");
+
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseNpgsql(connectionString));
 
 // ✅ Configuración JWT
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -123,26 +125,23 @@ builder.WebHost.UseUrls($"http://*:{port}");
 
 var app = builder.Build();
 
+// ✅ Migración segura con try-catch
 using (var scope = app.Services.CreateScope())
 {
-    var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-    //SeedData.Inicializar(context);
+    try
+    {
+        var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+        Console.WriteLine("Migrando base de datos...");
+        db.Database.Migrate();
+        Console.WriteLine("✅ Migración completada correctamente.");
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine("❌ Error durante la migración de la base de datos:");
+        Console.WriteLine(ex.Message);
+        Console.WriteLine("⚠️ La aplicación continuará ejecutándose.");
+    }
 }
-
-// 🔴 COMENTADO: para evitar error si no hay base de datos
-// using (var scope = app.Services.CreateScope())
-// {
-//     var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-//     context.LimpiarRequisitosInvalidos(); // método temporal
-// }
-
-// 🔴 COMENTADO: migraciones automáticas y limpieza temporal de requisitos
-// using (var scope = app.Services.CreateScope())
-// {
-//     var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-//     db.Database.Migrate(); // 👈 Esta línea es la que causaría el error si no hay BD
-//     await db.EliminarRequisitosCumplidosInvalidos();
-// }
 
 app.UseSwagger();
 app.UseSwaggerUI();
@@ -161,7 +160,6 @@ app.UseStaticFiles(new StaticFileOptions
     RequestPath = "/archivos"
 });
 
-
 // ✅ CORS
 app.UseCors("AllowReactApp");
 
@@ -170,11 +168,5 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
-
-using (var scope = app.Services.CreateScope())
-{
-    var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-    db.Database.Migrate();
-}
 
 app.Run();

@@ -1,0 +1,12 @@
+{
+  "build": {
+    "env": {
+      "DOTNET_VERSION": "8.0"
+    }
+  },
+  "deploy": {
+    "startCommand": "dotnet BackendScout.dll",
+    "restartPolicyType": "ON_FAILURE",
+    "restartPolicyMaxRetries": 10
+  }
+}
