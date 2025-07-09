@@ -150,6 +150,9 @@ app.UseSwaggerUI();
 app.UseDefaultFiles();
 app.UseStaticFiles();
 
+// Crear carpeta si no existe
+Directory.CreateDirectory(Path.Combine(Directory.GetCurrentDirectory(), "ArchivosMensajes"));
+
 // ✅ Exponer carpeta ArchivosMensajes
 app.UseStaticFiles(new StaticFileOptions
 {
@@ -157,6 +160,7 @@ app.UseStaticFiles(new StaticFileOptions
         Path.Combine(Directory.GetCurrentDirectory(), "ArchivosMensajes")),
     RequestPath = "/archivos"
 });
+
 
 // ✅ CORS
 app.UseCors("AllowReactApp");
