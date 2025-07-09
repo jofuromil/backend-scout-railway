@@ -126,7 +126,7 @@ var app = builder.Build();
 using (var scope = app.Services.CreateScope())
 {
     var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-    SeedData.Inicializar(context);
+    //SeedData.Inicializar(context);
 }
 
 // 🔴 COMENTADO: para evitar error si no hay base de datos
