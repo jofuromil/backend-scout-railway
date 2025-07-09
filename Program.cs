@@ -97,7 +97,7 @@ builder.Services.AddScoped<GestionService>();
 
 // ✅ Base de datos
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // ✅ Configuración JWT
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
