@@ -710,3 +710,4 @@ D:\SistemaScout\BackendDeploy\obj\Debug\net8.0\refint\BackendScout.dll
 D:\SistemaScout\BackendDeploy\obj\Debug\net8.0\BackendScout.pdb
 D:\SistemaScout\BackendDeploy\obj\Debug\net8.0\BackendScout.genruntimeconfig.cache
 D:\SistemaScout\BackendDeploy\obj\Debug\net8.0\ref\BackendScout.dll
+D:\SistemaScout\BackendDeploy\bin\Debug\net8.0\railway.json
